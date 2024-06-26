@@ -13,6 +13,7 @@
 
 <div class="cadastro">
     <form action="" method="post" id="formCadastro">
+        <?php echo csrf_field() ?>
         <div class="email">
             <label for="email">Digite seu email</label>
             <input type="email" name="email" id="email">

@@ -13,6 +13,7 @@
 
 <div class="login">
     <form action="" method="POST" id="formEntrar">
+        <?php echo csrf_field()  ?>
         <div class="email">
             <label for="email">Digite seu email</label>
             <input type="email" name="email" id="email">

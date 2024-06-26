@@ -1,3 +1,12 @@
+<?php
+namespace App\Controllers;
+
+use App\Controllers\BaseController;
+use App\Models\UserModel;
+use CodeIgniter\API\ResponseTrait;
+use CodeIgniter\I18n\Time;
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -11,26 +20,32 @@
     <h1>Olá, seja bem vindo ao nosso site!!</h1>
 </div>
 
+<?php
+$session = session()->get('loginData');
+dd($session);
+?>
+
 <div class="logout">
-    <button id="logoutButton">Logout</button>
+    <button id="logoutButton">Sair</button>
 </div>
     
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+
 
 <script>
     $(document).ready(function(){
         $('#logoutButton').click(function(){
             $.ajax({
                 url: '<?=site_url('logout')?>',
-                type: 'GET',
+                type: 'POST',
                 dataType: 'JSON',
                 success: function(response) {
                     if(response.status === 'success') {
                         window.location.href = '<?=site_url('login')?>';
                     }
                 },
-                error: function() {
-                    alert('Erro ao realizar logout');
+                error: function(error) {
+                    console.log(error)
                 }
             })
         })

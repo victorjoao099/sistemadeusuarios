@@ -27,13 +27,21 @@ class LoginController extends BaseController
             if(!$usuarioCheck){
                 return $this->respond("Usuário e/ou senha inválidos, por favor, tente novamente", 400);
             }
+            $users = $usuarioModel->where('email', $this->request->getPost('email'))->findAll();
+            // var_dump($users);
+            $userData = [
+                'id' => $users[0]['id'],
+                'nome' => $users[0]['nome'],
+                'email' => $users[0]['email'],
+            ];
                 $data = [
                     'status' => 'success',
                     'msg' => 'okok',
+                    'userData' => $userData,
                     'route' => route_to('inicial.index'),
                 ];
 
-                session()->set($data);
+                session()->set('loginData', $data);
 
                 return $this->respond($data);
         }

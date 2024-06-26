@@ -17,4 +17,4 @@ $routes->post('login', 'LoginController::entrar', ['as' => 'login.entrar']);
 
 $routes->get('paginicial', 'InicialController::index', ['as' => 'inicial.index']);
 
-$routes->get('logout', 'InicialController::logout', ['as' => 'inicial.logout']);
+$routes->POST('logout', 'InicialController::logout', ['as' => 'inicial.logout']);

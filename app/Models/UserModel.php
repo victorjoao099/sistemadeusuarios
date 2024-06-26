@@ -6,13 +6,13 @@ use CodeIgniter\Model;
 
 class UserModel extends Model
 {
-    protected $table            = 'usuarios';
+    protected $table            = 'users';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['email', 'senha', 'logoutTime'];
+    protected $allowedFields    = ['email', 'senha', 'primeiroLogin', 'ultimoLogin'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
@@ -25,7 +25,7 @@ class UserModel extends Model
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
-    protected $deletedField  = 'deleted_at';
+    protected $deletedField  = 'ultimoLogin';
 
     // Validation
     protected $validationRules      = [];
@@ -48,7 +48,7 @@ class UserModel extends Model
         $data['data']['senha'] = password_hash($data['data']['senha'], PASSWORD_DEFAULT);
         return $data;
     }
-
+    
     public function check ($email, $senha) {
 
         // Busca o email
@@ -62,4 +62,6 @@ class UserModel extends Model
         }
         return true;
     }
+
+
 }
