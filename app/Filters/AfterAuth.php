@@ -6,7 +6,7 @@ use CodeIgniter\Filters\FilterInterface;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 
-class Auth implements FilterInterface
+class AfterAuth implements FilterInterface
 {
     /**
      * Do whatever processing this filter needs to do.
@@ -25,10 +25,9 @@ class Auth implements FilterInterface
      */
     public function before(RequestInterface $request, $arguments = null)
     {
-        //validar a sessão assim como a autenticação do usuário
-        if (session()->get('loginData') == false) {
-            return redirect('login.index');
-        };
+        if(session()->get('loginData') == true){
+            return redirect('inicial.index');
+        }
     }
 
     /**
