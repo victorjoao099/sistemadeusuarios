@@ -47,9 +47,9 @@ class UserModel extends Model
     protected function hashSenha($data){
         $data['data']['senha'] = password_hash($data['data']['senha'], PASSWORD_DEFAULT);
         return $data;
-    }
+    } // Faz uma codificação hash para a senha cadastrada e retorna a senha
     
-    public function check ($email, $senha) {
+    public function check ($email, $senha) { // Checa o email e a senha
 
         // Busca o email
         $buscaEmail = $this->where('email', $email)->first() ?? [];
@@ -57,6 +57,8 @@ class UserModel extends Model
             return false;
         }
 
+
+        // Verifica a Senha
         if(!password_verify($senha, $buscaEmail['senha'])){
             return false;
         }

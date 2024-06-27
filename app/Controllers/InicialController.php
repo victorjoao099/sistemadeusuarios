@@ -22,35 +22,22 @@ class InicialController extends BaseController
     {
 
         $userModel = new UserModel();
-        // dd($userModel);
-        // dd($localTime);
 
         date_default_timezone_set('America/Sao_Paulo'); //Muda o fuso-horário
         $mytime = new Time('now'); // Captura o horáiro
 
-        // dd($mytime);
-
         $data = array( 
-            'ultimoLogin' => $mytime,
+            'ultimoLogin' => $mytime,  // Transforma a coluna último login para o horário atual
         );
 
-        // $session = session()->userData;
-        $session = session()->get('loginData')['userData'];
+        $session = session()->get('loginData')['userData']; // Captura dados da sessão
 
-        $id = $session['id'];
-
-
-        // dd($session);
+        $id = $session['id']; // Captura o id da sessão
 
         if ($userModel->update($id, $data)){
             session()->destroy();
-            return $this->response->setJSON(['status' => 'success']);
+            return $this->response->setJSON(['status' => 'success']); // Faz update do horário de logout, destroi a sessão e redireciona
         };
-
-
-        // if ($this->request->isAJAX()){
-        //     return $this->response->setJSON(['status' => 'success', 'message' => 'Sessão fechada com sucesso']);
-        // }
     }
     
 }

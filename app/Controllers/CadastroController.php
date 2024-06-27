@@ -24,6 +24,8 @@ class CadastroController extends BaseController
             $userModel = new UserModel();
             $userData = $this->request->getPost();
 
+
+            //  Checa o email para ver se ele não está cadastrado.
             if($userModel->check($userData['email'], $userData['senha'])){
                 return $this->respond("não é possível criar conta com esse email", 400);
             }
@@ -34,8 +36,8 @@ class CadastroController extends BaseController
                 if ($userModel->save($userData)){
                     $data = [
                         'status' => 'success',
-                        'message' => 'deu tudo certo',
-                        'route' => route_to('login.index'),
+                        'message' => 'deu tudo certo',  // Salva os dados e rediciona para a página inicial
+                        'route' => route_to('inicial.index'),
                     ];
 
                     return $this->respond($data);

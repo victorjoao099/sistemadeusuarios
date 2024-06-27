@@ -20,10 +20,6 @@ use CodeIgniter\I18n\Time;
     <h1>Olá, seja bem vindo ao nosso site!!</h1>
 </div>
 
-<?php
-$session = session()->get('loginData');
-dd($session);
-?>
 
 <div class="logout">
     <button id="logoutButton">Sair</button>

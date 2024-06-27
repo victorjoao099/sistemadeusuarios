@@ -27,8 +27,11 @@ class LoginController extends BaseController
             if(!$usuarioCheck){
                 return $this->respond("Usuário e/ou senha inválidos, por favor, tente novamente", 400);
             }
+
+            //Busca nos dados da sessão todos os que estão autenticados com email
             $users = $usuarioModel->where('email', $this->request->getPost('email'))->findAll();
-            // var_dump($users);
+
+            // Transforma os dados obtidos em dados relevantes na variável userData
             $userData = [
                 'id' => $users[0]['id'],
                 'nome' => $users[0]['nome'],
@@ -41,6 +44,7 @@ class LoginController extends BaseController
                     'route' => route_to('inicial.index'),
                 ];
 
+                // Define a váriavel loginData como importante para ser usada futuramente
                 session()->set('loginData', $data);
 
                 return $this->respond($data);
